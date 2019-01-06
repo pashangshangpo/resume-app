@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -31,7 +32,10 @@ class _HomePageState extends State<HomePage> {
   void _saveData() async {
     File resumeFile = await _getFile(fileName);
 
-    resumeFile.writeAsString('hello world');
+    resumeFile.writeAsString(json.encode({
+      'name': _nameController.text,
+      'sex': _sexController.text,
+    }));
   }
 
   @override
