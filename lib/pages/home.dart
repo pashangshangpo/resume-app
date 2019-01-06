@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var fileName = 'resume_v1.json';
 
-  List infoList = [
+  static List _infoList = [
     {
       'type': 'TextField',
       'config': {
@@ -74,6 +74,25 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
+  var inputList = _infoList.map<Widget>((info) {
+    String type = info['type'];
+    Map config = info['config'];
+    var infoText;
+
+    switch (type) {
+      case 'TextField':
+        infoText = new TextField(
+          controller: new TextEditingController(),
+          maxLines: config['maxLines'],
+          decoration: config['decoration'],
+        );
+
+        break;
+    }
+
+    return infoText;
+  }).toList();
+
   @override
   initState() {
     super.initState();
@@ -103,25 +122,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var inputList = infoList.map<Widget>((info) {
-      String type = info['type'];
-      Map config = info['config'];
-      var infoText;
-
-      switch (type) {
-        case 'TextField':
-          infoText = new TextField(
-            controller: new TextEditingController(),
-            maxLines: config['maxLines'],
-            decoration: config['decoration'],
-          );
-
-          break;
-      }
-
-      return infoText;
-    }).toList();
-
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.all(12.0),
