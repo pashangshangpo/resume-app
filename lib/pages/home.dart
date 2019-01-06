@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _fixedNumberYearController = new TextEditingController();
   TextEditingController _introduceController = new TextEditingController();
 
-  String fileName = 'resume_v1.json';
+  var fileName = 'resume_v1.json';
 
   @override
   initState() {
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
     _init();
   }
 
-  Future<File> _getFile(String fileName) async {
+  Future<File> _getFile(fileName) async {
     String dir = (await getApplicationDocumentsDirectory()).path;
 
     return new File('$dir/$fileName');
