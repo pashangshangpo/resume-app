@@ -20,6 +20,8 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _fixedNumberYearController = new TextEditingController();
   TextEditingController _introduceController = new TextEditingController();
 
+  String fileName = 'resume_v1.json';
+
   Future<File> _getFile(String fileName) async {
     String dir = (await getApplicationDocumentsDirectory()).path;
 
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _saveData() async {
-    File resumeFile = await _getFile('resume_v1.json');
+    File resumeFile = await _getFile(fileName);
 
     resumeFile.writeAsString('hello world');
   }
