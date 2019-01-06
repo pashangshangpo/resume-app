@@ -23,6 +23,21 @@ class _HomePageState extends State<HomePage> {
 
   String fileName = 'resume_v1.json';
 
+  @override
+  initState() {
+    super.initState();
+
+    void _init() async {
+      File resumeFile = await _getFile(fileName);
+      Map resume = json.decode(await resumeFile.readAsString());
+
+      _nameController.text = resume['name'];
+      _sexController.text = resume['sex'];
+    }
+
+    _init();
+  }
+
   Future<File> _getFile(String fileName) async {
     String dir = (await getApplicationDocumentsDirectory()).path;
 
