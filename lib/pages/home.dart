@@ -73,22 +73,26 @@ class _HomePageState extends State<HomePage> {
       }
     },
   ];
+  static List _controllerList = [];
 
   var inputList = _infoList.map<Widget>((info) {
     String type = info['type'];
     Map config = info['config'];
     var infoText;
+    var controller = new TextEditingController();
 
     switch (type) {
       case 'TextField':
         infoText = new TextField(
-          controller: new TextEditingController(),
+          controller: controller,
           maxLines: config['maxLines'],
           decoration: config['decoration'],
         );
 
         break;
     }
+
+    _controllerList.add(controller);
 
     return infoText;
   }).toList();
