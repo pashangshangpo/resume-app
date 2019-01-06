@@ -20,13 +20,14 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _fixedNumberYearController = new TextEditingController();
   TextEditingController _introduceController = new TextEditingController();
 
-  Future<String> _getDocumentsDir() async {
-    return (await getApplicationDocumentsDirectory()).path;
+  Future<File> _getFile(String fileName) async {
+    String dir = (await getApplicationDocumentsDirectory()).path;
+
+    return new File('$dir/$fileName');
   }
 
   void _saveData() async {
-    String dir = await _getDocumentsDir();
-    File resumeFile = new File('$dir/resume_v1.json');
+    File resumeFile = await _getFile('resume_v1.json');
 
     resumeFile.writeAsString('hello world');
   }
