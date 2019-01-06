@@ -22,6 +22,15 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _introduceController = new TextEditingController();
 
   var fileName = 'resume_v1.json';
+  List infoList = [
+    {
+      'type': 'TextField',
+      'decoration': InputDecoration(
+        labelText: '姓名',
+        hintText: '请输入姓名',
+      ),
+    }
+  ];
 
   @override
   initState() {
@@ -55,17 +64,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List infoList = [
-      {
-        'type': 'TextField',
-        'decoration': InputDecoration(
-          labelText: '姓名',
-          hintText: '请输入姓名',
-        ),
-      }
-    ];
-
-    for (var info in infoList) {
+    var inputList = infoList.map((info) {
       String type = info['type'];
       var infoText;
 
@@ -79,8 +78,10 @@ class _HomePageState extends State<HomePage> {
           break;
       }
 
-      print(infoText.controller.text);
-    }
+      return infoText;
+    }).toList();
+
+    print(inputList[0].controller);
 
     return Scaffold(
       body: Container(
