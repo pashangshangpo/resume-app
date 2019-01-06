@@ -55,6 +55,33 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List infoList = [
+      {
+        'type': 'TextField',
+        'decoration': InputDecoration(
+          labelText: '姓名',
+          hintText: '请输入姓名',
+        ),
+      }
+    ];
+
+    for (var info in infoList) {
+      String type = info['type'];
+      var infoText;
+
+      switch (type) {
+        case 'TextField':
+          infoText = new TextField(
+            controller: new TextEditingController(),
+            decoration: info['decoration'],
+          );
+
+          break;
+      }
+
+      print(infoText.controller.text);
+    }
+
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.all(12.0),
