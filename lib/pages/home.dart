@@ -14,14 +14,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController _nameController = new TextEditingController();
-  TextEditingController _sexController = new TextEditingController();
-  TextEditingController _ageController = new TextEditingController();
-  TextEditingController _educationController = new TextEditingController();
-  TextEditingController _fixedNumberYearController = new TextEditingController();
-  TextEditingController _introduceController = new TextEditingController();
-
   var fileName = 'resume_v1.json';
+
   List infoList = [
     {
       'type': 'TextField',
@@ -31,7 +25,53 @@ class _HomePageState extends State<HomePage> {
           hintText: '请输入姓名',
         ),
       }
-    }
+    },
+    {
+      'type': 'TextField',
+      'config': {
+        'decoration': InputDecoration(
+          labelText: '性别',
+          hintText: '请输入性别',
+        ),
+      }
+    },
+    {
+      'type': 'TextField',
+      'config': {
+        'decoration': InputDecoration(
+          labelText: '年龄',
+          hintText: '请输入年龄',
+        ),
+      }
+    },
+    {
+      'type': 'TextField',
+      'config': {
+        'decoration': InputDecoration(
+          labelText: '学历',
+          hintText: '请输入学历',
+        ),
+      }
+    },
+    {
+      'type': 'TextField',
+      'config': {
+        'decoration': InputDecoration(
+          labelText: '工作经验',
+          hintText: '请输入工作经验',
+        ),
+      }
+    },
+    {
+      'type': 'TextField',
+      'config': {
+        'maxLines': 3,
+        'decoration': InputDecoration(
+          labelText: '自我介绍',
+          hintText: '请输入自我介绍',
+        ),
+      }
+    },
   ];
 
   @override
@@ -39,11 +79,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     void _init() async {
-      File resumeFile = await _getFile(fileName);
-      Map resume = json.decode(await resumeFile.readAsString());
-
-      _nameController.text = resume['name'];
-      _sexController.text = resume['sex'];
+      // File resumeFile = await _getFile(fileName);
+      // Map resume = json.decode(await resumeFile.readAsString());
     }
 
     _init();
@@ -56,25 +93,27 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _saveData() async {
-    File resumeFile = await _getFile(fileName);
+    // File resumeFile = await _getFile(fileName);
 
-    resumeFile.writeAsString(json.encode({
-      'name': _nameController.text,
-      'sex': _sexController.text,
-    }));
+    // resumeFile.writeAsString(json.encode({
+    //   'name': _nameController.text,
+    //   'sex': _sexController.text,
+    // }));
   }
 
   @override
   Widget build(BuildContext context) {
     var inputList = infoList.map<Widget>((info) {
       String type = info['type'];
+      Map config = info['config'];
       var infoText;
 
       switch (type) {
         case 'TextField':
           infoText = new TextField(
             controller: new TextEditingController(),
-            decoration: info['config']['decoration'],
+            maxLines: config['maxLines'],
+            decoration: config['decoration'],
           );
 
           break;
