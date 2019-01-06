@@ -26,8 +26,9 @@ class _HomePageState extends State<HomePage> {
 
   void _saveData() async {
     String dir = await _getDocumentsDir();
+    File resumeFile = new File('$dir/resume_v1.json');
 
-    print(dir);
+    resumeFile.writeAsString('hello world');
   }
 
   @override
