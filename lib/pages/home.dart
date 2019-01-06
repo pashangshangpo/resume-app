@@ -1,4 +1,7 @@
+import 'dart:io';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -16,6 +19,16 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _educationController = new TextEditingController();
   TextEditingController _fixedNumberYearController = new TextEditingController();
   TextEditingController _introduceController = new TextEditingController();
+
+  Future<String> _getDocumentsDir() async {
+    return (await getApplicationDocumentsDirectory()).path;
+  }
+
+  void _saveData() async {
+    String dir = await _getDocumentsDir();
+
+    print(dir);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +82,12 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      )
+      ),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: _saveData,
+        tooltip: 'Increment',
+        child: new Icon(Icons.add),
+      ),
     );
   }
 }
